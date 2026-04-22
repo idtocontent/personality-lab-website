@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Personality Lab — Transform Into An Icon</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; background: #fff; color: #2a2624; line-height: 1.6; overflow-x: hidden; }
+.container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+header { background: #fff; padding: 2rem 0; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 100; }
+header .container { display: flex; justify-content: space-between; align-items: center; }
+header h1 { font-size: 26px; font-weight: 700; letter-spacing: 3px; color: #ed3291; }
+nav { display: flex; gap: 3rem; }
+nav a { text-decoration: none; color: #2a2624; font-size: 14px; font-weight: 600; transition: color 0.3s; }
+nav a:hover { color: #ed3291; }
+.hero { min-height: 90vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%); padding: 6rem 2rem; text-align: center; }
+.hero-content { max-width: 900px; }
+.hero-content h2 { font-size: 56px; font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; color: #2a2624; }
+.hero-content h2 .highlight { color: #ed3291; }
+.hero-content .subtitle { font-size: 32px; font-weight: 400; font-style: italic; color: #ed3291; margin-bottom: 2rem; }
+.hero-content p { font-size: 19px; color: #666; margin-bottom: 3rem; }
+.hero-images { display: flex; justify-content: center; gap: 2rem; margin: 4rem 0; flex-wrap: wrap; }
+.hero-img { width: 200px; height: 260px; background: #e0e0e0; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
+.hero-img img { width: 100%; height: 100%; object-fit: cover; }
+.cta-buttons { display: flex; justify-content: center; gap: 2rem; margin-top: 3rem; flex-wrap: wrap; }
+.btn { padding: 18px 40px; font-size: 16px; font-weight: 700; border: 2px solid; border-radius: 4px; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
+.btn-primary { background: #ed3291; color: #fff; border-color: #ed3291; }
+.btn-primary:hover { background: #d91e7a; border-color: #d91e7a; transform: translateY(-2px); }
+.btn-secondary { background: transparent; color: #2a2624; border-color: #2a2624; }
+.btn-secondary:hover { background: #f5f5f5; }
+section { padding: 6rem 0; }
+.section-title { text-align: center; margin-bottom: 4rem; }
+.section-title h3 { font-size: 48px; font-weight: 700; color: #2a2624; margin-bottom: 0.5rem; }
+.section-title .accent { color: #ed3291; }
+.formula { background: #fff; }
+.formula-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
+.formula-card { padding: 3rem; border: 1px solid #e0e0e0; background: #f9f9f9; border-radius: 8px; }
+.formula-card h4 { font-size: 24px; font-weight: 700; color: #ed3291; margin-bottom: 1.5rem; }
+.formula-card p { font-size: 16px; color: #555; line-height: 1.8; }
+.tracker { background: #f5f5f5; }
+.tracker-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+.tracker-card { background: #fff; padding: 2.5rem; border-radius: 8px; border: 1px solid #e0e0e0; }
+.tracker-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.tracker-header h4 { font-size: 18px; font-weight: 700; color: #2a2624; }
+.day-badge { background: #ed3291; color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.tracker-stat { display: flex; justify-content: space-between; margin: 1rem 0; padding: 0.8rem 0; border-bottom: 1px solid #f0f0f0; }
+.tracker-stat-label { font-size: 14px; color: #666; }
+.tracker-stat-value { font-size: 16px; font-weight: 700; color: #ed3291; }
+.quiz { background: #fff; }
+.quiz-container { max-width: 800px; margin: 0 auto; }
+.quiz-intro { text-align: center; margin-bottom: 3rem; }
+.quiz-intro p { font-size: 18px; color: #666; margin-bottom: 1.5rem; }
+.quiz-btn { background: #ed3291; color: #fff; padding: 16px 40px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: 700; transition: all 0.3s; }
+.quiz-btn:hover { background: #d91e7a; transform: translateY(-2px); }
+.cases { background: #f5f5f5; }
+.case-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
+.case-item { background: #fff; padding: 3rem; border-radius: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+@media (max-width: 1024px) { .case-item { grid-template-columns: 1fr; } }
+.case-images { display: flex; gap: 1.5rem; justify-content: center; }
+.case-img { width: 160px; height: 220px; background: #e0e0e0; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+.case-img img { width: 100%; height: 100%; object-fit: cover; }
+.slider-container { position: relative; width: 100%; max-width: 400px; margin: 0 auto; }
+.img-wrapper { position: relative; width: 100%; height: 300px; overflow: hidden; border-radius: 8px; }
+.img-before, .img-after { position: absolute; width: 100%; height: 100%; }
+.img-before img, .img-after img { width: 100%; height: 100%; object-fit: cover; }
+.img-after { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+.slider-handle { position: absolute; width: 60px; height: 100%; left: 50%; top: 0; cursor: ew-resize; background: rgba(237, 50, 145, 0.1); border-left: 3px solid #ed3291; }
+.case-content h4 { font-size: 28px; font-weight: 700; color: #2a2624; margin-bottom: 1rem; }
+.case-content p { font-size: 16px; color: #666; margin-bottom: 1.5rem; line-height: 1.8; }
+.case-metrics { display: flex; gap: 1rem; flex-wrap: wrap; }
+.metric { background: #f5f5f5; padding: 1rem 1.5rem; border-radius: 4px; font-weight: 700; color: #ed3291; font-size: 14px; }
+.founders { background: #fff; }
+.founders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+@media (max-width: 1024px) { .founders-grid { grid-template-columns: 1fr; } }
+.founder-card { }
+.founder-img { width: 100%; height: 400px; background: #e0e0e0; border-radius: 8px; margin-bottom: 2rem; overflow: hidden; }
+.founder-img img { width: 100%; height: 100%; object-fit: cover; }
+.founder-name { font-size: 32px; font-weight: 700; color: #ed3291; margin-bottom: 0.5rem; }
+.founder-role { font-size: 14px; color: #666; font-weight: 600; margin-bottom: 1.5rem; }
+.founder-bio { font-size: 16px; color: #555; line-height: 1.8; }
+.story { background: #f5f5f5; }
+.story-content { max-width: 700px; margin: 0 auto; }
+.story-content p { font-size: 17px; color: #555; line-height: 2; margin-bottom: 2rem; }
+.highlight-text { color: #ed3291; font-weight: 700; }
+.masterclass { background: #fff; }
+.masterclass-container { max-width: 900px; margin: 0 auto; }
+.masterclass-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+@media (max-width: 1024px) { .masterclass-grid { grid-template-columns: 1fr; } }
+.masterclass-info h4 { font-size: 32px; font-weight: 700; color: #2a2624; margin-bottom: 1.5rem; }
+.masterclass-info ul { list-style: none; margin: 2rem 0; }
+.masterclass-info li { font-size: 16px; color: #555; margin: 1rem 0; padding-left: 2rem; position: relative; }
+.masterclass-info li:before { content: "✓"; position: absolute; left: 0; color: #ed3291; font-weight: 700; }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; font-size: 14px; font-weight: 600; color: #2a2624; margin-bottom: 0.5rem; }
+.form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 4px; font-size: 16px; transition: border-color 0.3s; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: #ed3291; }
+.submit-btn { background: #ed3291; color: #fff; padding: 14px 30px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: 700; width: 100%; transition: all 0.3s; }
+.submit-btn:hover { background: #d91e7a; }
+.apply { background: #2a2624; color: #fff; }
+.apply h3 { font-size: 48px; font-weight: 700; margin-bottom: 2rem; }
+.apply p { font-size: 17px; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+.apply-list { list-style: none; max-width: 600px; margin: 2rem auto; }
+.apply-list li { font-size: 16px; margin: 1.2rem 0; }
+.apply-list li:before { content: "✓ "; color: #ed3291; font-weight: 700; margin-right: 0.5rem; }
+.apply-btn { background: #ed3291; color: #fff; padding: 16px 40px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: 700; margin-top: 2rem; transition: background 0.3s; }
+.apply-btn:hover { background: #d91e7a; }
+.waitlist { background: #fff; }
+.waitlist-container { max-width: 700px; margin: 0 auto; text-align: center; }
+.waitlist-badge { background: #ed3291; color: #fff; padding: 8px 20px; border-radius: 20px; font-size: 14px; font-weight: 700; display: inline-block; margin-bottom: 1.5rem; }
+.waitlist-form { display: flex; gap: 1rem; margin-top: 2rem; }
+.waitlist-form input { flex: 1; padding: 12px; border: 1px solid #e0e0e0; border-radius: 4px; font-size: 16px; }
+.waitlist-form button { padding: 12px 30px; background: #ed3291; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: 700; white-space: nowrap; }
+.coming-soon { background: #f5f5f5; text-align: center; }
+.coming-soon h3 { font-size: 48px; font-weight: 700; color: #2a2624; margin-bottom: 1rem; }
+.coming-soon p { font-size: 17px; color: #666; max-width: 700px; margin: 1.5rem auto; line-height: 1.8; }
+footer { background: #2a2624; color: #fff; padding: 3rem; text-align: center; font-size: 14px; }
+footer a { color: #ed3291; text-decoration: none; margin: 0 1rem; }
+@media (max-width: 768px) {
+  nav { gap: 1.5rem; font-size: 13px; }
+  .hero-content h2 { font-size: 36px; }
+  .hero-content .subtitle { font-size: 22px; }
+  .section-title h3 { font-size: 32px; }
+  .hero-images { gap: 1rem; }
+  .hero-img { width: 140px; height: 180px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<h1>TLB</h1>
+<nav>
+<a href="#formula">Formula</a>
+<a href="#tracker">Tracker</a>
+<a href="#cases">Cases</a>
+<a href="#founders">Team</a>
+<a href="#apply">Apply</a>
+</nav>
+</div>
+</header>
+
+<section class="hero">
+<div class="hero-content">
+<h2>Personality Over Influence<br><span class="highlight">Not Just Building Creators. Building You Into An Icon.</span></h2>
+<p class="subtitle">Meet Irina & Amaliia. We Transformed Our Lives Into A Story. Now We Transform Yours.</p>
+<div class="hero-images">
+<div class="hero-img"><img src="images/together.jpg" alt="Irina & Amaliia"></div>
+</div>
+<div class="cta-buttons">
+<button class="btn btn-primary" onclick="document.getElementById('tracker').scrollIntoView({behavior: 'smooth'})">See Our Work</button>
+<button class="btn btn-secondary" onclick="document.getElementById('apply').scrollIntoView({behavior: 'smooth'})">Start Your Journey</button>
+</div>
+</div>
+</section>
+
+<section class="formula" id="formula">
+<div class="container">
+<div class="section-title">
+<p style="color: #ed3291; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.5rem;">THE TRANSFORMATION FORMULA</p>
+<h3>How We Build <span class="accent">Iconic</span> Personalities</h3>
+</div>
+<div class="formula-grid">
+<div class="formula-card">
+<h4>Discovery</h4>
+<p>We Spend Days With You. Not Hours. Days. Understanding who you are, what drives you, your strengths, your deepest story. This is where real transformation begins.</p>
+</div>
+<div class="formula-card">
+<h4>Strategy & Styling</h4>
+<p>Personality Meets Algorithm. While we rebuild your visual identity and aesthetic, we craft your content strategy. Every frame counts. Every post is psychology.</p>
+</div>
+<div class="formula-card">
+<h4>Launch & Scale</h4>
+<p>From Zero Followers To Authority Figure. We don't just launch. We build systems. Real engagement. Real growth. Results that compound.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="tracker" id="tracker">
+<div class="container">
+<div class="section-title">
+<p style="color: #ed3291; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.5rem;">LIVE TRANSFORMATION TRACKER</p>
+<h3>Watch Them <span class="accent">Transform</span> In Real-Time</h3>
+</div>
+<div class="tracker-grid">
+<div class="tracker-card">
+<div class="tracker-header">
+<h4>CLIENT 1</h4>
+<span class="day-badge">DAY 15/90</span>
+</div>
+<div class="tracker-stat">
+<span class="tracker-stat-label">Followers</span>
+<span class="tracker-stat-value">245 → 2,840</span>
+</div>
+<div class="tracker-stat">
+<span class="tracker-stat-label">Engagement Rate</span>
+<span class="tracker-stat-value">2% → 11.2%</span>
+</div>
+<div class="tracker-stat">
+<span class="tracker-stat-label">Content Posts</span>
+<span class="tracker-stat-value">5 → 23</span>
+</div>
+<div class="tracker-stat">
+<span class="tracker-stat-label">This Week</span>
+<span class="tracker-stat-value">Strategy Refinement</span>
+</div>
+</div>
+
+<div class="tracker-card">
+<div class="tracker-header">
+<h4>CLIENT 2</h4>
+<span class="day-badge">DAY 8/90</span>
+</div>
+<div class="tracker-stat">
+<span class="tracker-stat-label">Followers</span>
+<span class="tracker-stat-value">120 → 890</span>
+</div>
+<div class="tracker-stat">
+<span class="tracker-stat-label">Engagement Rate</span>
+<span class="tracker-stat-value">1.5% → 8.7%</span>
+</div>
+<div class="tracker-stat">
+<span class="tracker-stat-label">Content Posts</span>
+<span class="tracker-stat-value">3 → 14</span>
+</div>
+<div class="tracker-stat">
+<span class="tracker-stat-label">This Week</span>
+<span class="tracker-stat-value">First Shoot Day</span>
+</div>
+</div>
+
+<div class="tracker-card">
+<div class="tracker-header">
+<h4>CLIENT 3</h4>
+<span class="day-badge">DAY 1/90</span>
+</div>
+<div class="tracker-stat">
+<span class="tracker-stat-label">Followers</span>
+<span class="tracker-stat-value">0 → Discovery Phase</span>
+</div>
+<div class="tracker-stat">
+<span class="tracker-stat-label">Status</span>
+<span class="tracker-stat-value">Interview Complete</span>
+</div>
+<div class="tracker-stat">
+<span class="tracker-stat-label">Next Step</span>
+<span class="tracker-stat-value">Strategy Meeting</span>
+</div>
+<div class="tracker-stat">
+<span class="tracker-stat-label">Timeline</span>
+<span class="tracker-stat-value">89 Days Remaining</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="quiz" id="quiz">
+<div class="container">
+<div class="quiz-container">
+<div class="section-title">
+<p style="color: #ed3291; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.5rem;">PERSONALITY QUIZ</p>
+<h3>Discover Your <span class="accent">Icon Type</span></h3>
+</div>
+<div class="quiz-intro">
+<p>Take our 10-question assessment to discover what type of personality icon you're meant to be. Get personalized insights and a free strategy report.</p>
+<button class="quiz-btn" onclick="alert('Quiz coming soon! Join our waitlist for early access.')">Take The Quiz</button>
+</div>
+</div>
+</div>
+</section>
+
+<section class="cases" id="cases">
+<div class="container">
+<div class="section-title">
+<p style="color: #ed3291; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.5rem;">TRANSFORMATION CASES</p>
+<h3>From Unknown To <span class="accent">Iconic</span></h3>
+</div>
+<div class="case-grid">
+
+<div class="case-item">
+<div class="case-images">
+<div class="slider-container">
+<div class="img-wrapper">
+<div class="img-before"><img src="images/client1.jpg" alt="Before"></div>
+<div class="img-after"><img src="images/client1.jpg" alt="After"></div>
+<div class="slider-handle" onmousedown="startSlide(event)"></div>
+</div>
+</div>
+</div>
+<div class="case-content">
+<h4>Client 1: The Discovery</h4>
+<p>She came to us raw. No followers. No personal brand. No story. We spent 3 days understanding her—her dreams, fears, strengths, her deepest essence. Then we built her image around that truth.</p>
+<div class="case-metrics">
+<span class="metric">0 → 2,840 followers</span>
+<span class="metric">Real Engagement</span>
+<span class="metric">Day 15/90</span>
+</div>
+</div>
+</div>
+
+<div class="case-item">
+<div class="case-images">
+<div class="slider-container">
+<div class="img-wrapper">
+<div class="img-before"><img src="images/client2.jpg" alt="Before"></div>
+<div class="img-after"><img src="images/client2.jpg" alt="After"></div>
+<div class="slider-handle" onmousedown="startSlide(event)"></div>
+</div>
+</div>
+</div>
+<div class="case-content">
+<h4>Client 2: The Strategy</h4>
+<p>She had potential but no direction. We identified her unique positioning, built her aesthetic, and created a system that works. Every post is calculated. Every frame is intentional.</p>
+<div class="case-metrics">
+<span class="metric">120 → 890 followers</span>
+<span class="metric">First Week Results</span>
+<span class="metric">Day 8/90</span>
+</div>
+</div>
+</div>
+
+<div class="case-item">
+<div class="case-images">
+<div class="slider-container">
+<div class="img-wrapper">
+<div class="img-before"><img src="images/client3.jpg" alt="Before"></div>
+<div class="img-after"><img src="images/client3.jpg" alt="After"></div>
+<div class="slider-handle" onmousedown="startSlide(event)"></div>
+</div>
+</div>
+</div>
+<div class="case-content">
+<h4>Client 3: The Beginning</h4>
+<p>Day 1. Fresh start. We're documenting everything. The interviews. The shoots. The decisions. The wins. You're watching real transformation happen in real-time.</p>
+<div class="case-metrics">
+<span class="metric">Starting Now</span>
+<span class="metric">Full Documentation</span>
+<span class="metric">89 Days To Icon</span>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="founders" id="founders">
+<div class="container">
+<div class="section-title">
+<h3>Meet <span class="accent">Us</span></h3>
+<p style="font-size: 18px; color: #666; margin-top: 1rem;">We're not just building your brand. We're building ours. And you're invited to watch.</p>
+</div>
+<div class="founders-grid">
+<div class="founder-card">
+<div class="founder-img"><img src="images/irina.jpg" alt="Irina"></div>
+<h3 class="founder-name">Irina</h3>
+<p class="founder-role">The Aesthete & Stylist</p>
+<p class="founder-bio">I grew up obsessed with Vogue, Met Gala, Western luxury. While others played, I studied presence, elegance, image. Now I teach people how to BE that. How to move like it. How to look like it. Presence isn't learned. It's constructed. And I construct it.</p>
+</div>
+<div class="founder-card">
+<div class="founder-img"><img src="images/amaliia.jpg" alt="Amaliia"></div>
+<h3 class="founder-name">Amaliia</h3>
+<p class="founder-role">The Strategist & Architect</p>
+<p class="founder-bio">I understand markets, psychology, growth mechanics. I know WHY people follow. WHY they buy. WHY they believe. While Irina builds your image, I build your empire. Strategy without aesthetics is boring. Aesthetics without strategy is broke. Together? We're unstoppable.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="story">
+<div class="container">
+<div class="section-title">
+<h3>Why We Built <span class="accent">This</span></h3>
+</div>
+<div class="story-content">
+<p><span class="highlight-text">Five years.</span> That's how long Irina and I didn't see each other. Irina in Ivanovo. Me in Miami. Different continents. Different lives. But same dream.</p>
+<p>We wanted to build something that <span class="highlight-text">MATTERS.</span> Not just for money. (Though money is important. We need it to see each other, to move, to live freely.)</p>
+<p>So we started taking clients. Not just teaching them content strategy. But <span class="highlight-text">changing their lives.</span> Showing them their potential. Building their image. Making them feel powerful.</p>
+<p>And in the process? We realized: <span class="highlight-text">THIS is our story too.</span></p>
+<p>Now we're coming together. Building the lab. Building the brand. Building US. This website? This is Chapter 1. Wait for the show.</p>
+</div>
+</div>
+</section>
+
+<section class="masterclass" id="masterclass">
+<div class="container">
+<div class="section-title">
+<p style="color: #ed3291; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.5rem;">LIVE MASTERCLASS</p>
+<h3>The Personality Lab <span class="accent">Blueprint</span></h3>
+</div>
+<div class="masterclass-container">
+<div class="masterclass-grid">
+<div class="masterclass-info">
+<h4>What You'll Learn</h4>
+<ul>
+<li>The 3-Day Discovery Process (what we ask, why it matters)</li>
+<li>How To Find Your Unique Positioning (aesthetics + algorithm)</li>
+<li>Building Your Content System (that actually works)</li>
+<li>From Day 1 To Day 90 (real results, real timeline)</li>
+<li>Scaling Your Personal Brand (without losing authenticity)</li>
+</ul>
+<p style="margin-top: 2rem; font-size: 16px; color: #555;"><strong>$97 per ticket | 90 minutes live | Q&A included</strong></p>
+<button class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;" onclick="document.getElementById('masterclass-form').scrollIntoView({behavior: 'smooth'})">Reserve Your Spot</button>
+</div>
+<div style="background: #f5f5f5; padding: 3rem; border-radius: 8px;">
+<form id="masterclass-form">
+<h4 style="margin-bottom: 1.5rem;">Sign Up For Masterclass</h4>
+<div class="form-group">
+<label>Full Name</label>
+<input type="text" placeholder="Your name" required>
+</div>
+<div class="form-group">
+<label>Email</label>
+<input type="email" placeholder="your@email.com" required>
+</div>
+<div class="form-group">
+<label>What's Your Main Goal?</label>
+<select required>
+<option value="">Select one...</option>
+<option value="followers">Growing followers</option>
+<option value="engagement">Better engagement</option>
+<option value="brand">Building personal brand</option>
+<option value="influence">Creating influence</option>
+<option value="other">Other</option>
+</select>
+</div>
+<button type="submit" class="submit-btn">Reserve Spot ($97)</button>
+</form>
+</div>
+</div>
+</div>
+</section>
+
+<section class="waitlist" id="waitlist">
+<div class="container">
+<div class="waitlist-container">
+<div class="section-title">
+<p style="color: #ed3291; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.5rem;">NEXT COHORT OPENING</p>
+<h3>Join The <span class="accent">Waitlist</span></h3>
+</div>
+<div class="waitlist-badge">Only 5 Spots Available Next Round</div>
+<p style="font-size: 17px; color: #666; margin: 2rem 0;">We take 5 clients at a time. Period. Quality > Quantity. Join the waitlist now to be first in line.</p>
+<div class="waitlist-form">
+<input type="email" placeholder="your@email.com" required>
+<button type="button" onclick="alert('Thank you! You\'re on the waitlist.')">Join Waitlist</button>
+</div>
+</div>
+</div>
+</section>
+
+<section class="coming-soon">
+<div class="container">
+<h3>The Reality Show <span class="accent">(Not Kidding)</span></h3>
+<p>We're not just building your brand. We're building OURS. And you're invited to watch. Kazakhstan. University. Growth. Conflict. Victory. Like Kardashians, but real. Follow our journey on YouTube, TikTok, and Instagram.</p>
+<p style="margin-top: 2rem;"><strong>YouTube channel coming soon. Subscribe to get notified.</strong></p>
+</div>
+</section>
+
+<section class="apply" id="apply">
+<div class="container">
+<h3>Ready To Become <span style="color: #ed3291;">Iconic?</span></h3>
+<p>We don't work with everyone. You need real ambition, willingness to radically change, 90 days of commitment, and openness to being seen.</p>
+<ul class="apply-list">
+<li>Real ambition (not just likes)</li>
+<li>Willingness to change (radically)</li>
+<li>90 days of full commitment</li>
+<li>Openness to being documented</li>
+<li>Ready to invest in yourself ($5K-50K)</li>
+</ul>
+<button class="apply-btn" onclick="alert('Application coming soon. Join the waitlist for early access.')">Apply For Consultation</button>
+</div>
+</section>
+
+<footer>
+<p>© 2025 The Personality Lab. Building Iconic Personalities.</p>
+<p><a href="#">Instagram</a> | <a href="#">TikTok</a> | <a href="#">YouTube</a> | <a href="#">Email</a></p>
+</footer>
+
+<script>
+function startSlide(e) {
+  const slider = e.target;
+  const container = slider.closest('.slider-container');
+  const img = container.querySelector('.img-after');
+  
+  function moveSlider(event) {
+    const rect = container.getBoundingClientRect();
+    let x = event.clientX - rect.left;
+    if (x < 0) x = 0;
+    if (x > rect.width) x = rect.width;
+    
+    slider.style.left = x + 'px';
+    img.style.clipPath = `polygon(0 0, ${(x / rect.width) * 100}% 0, ${(x / rect.width) * 100}% 100%, 0 100%)`;
+  }
+  
+  function stopSlide() {
+    document.removeEventListener('mousemove', moveSlider);
+    document.removeEventListener('mouseup', stopSlide);
+  }
+  
+  document.addEventListener('mousemove', moveSlider);
+  document.addEventListener('mouseup', stopSlide);
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({behavior: 'smooth'});
+  });
+});
+</script>
+
+</body>
+</html>
